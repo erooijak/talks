@@ -1,0 +1,122 @@
+% Created 2016-12-14 Wed 00:32
+\documentclass[presentation]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\usetheme{metropolis}
+\setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers - Alliander}
+\metroset{block=fill}
+\usetheme{default}
+\author{Erwin Rooijakkers}
+\date{14-12-2016}
+\title{What is so great about Clojure?}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 25.1.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\begin{frame}[label=sec-0-1]{Personal journey}
+\includegraphics[width=.9\linewidth]{../images/wizard.jpg}
+\end{frame}
+
+\section{Clojure is a Lisp}
+\label{sec-1}
+
+\begin{frame}[label=sec-1-1]{What is so great about Lisp?}
+\begin{quotation}
+"The most powerful programming language is Lisp. If you don't know Lisp (or its variant, Scheme), you don't know what it means for a programming language to be powerful and elegant. Once you learn Lisp, you will see what is lacking in most other languages." --- Richard Stallman
+\end{quotation}
+\end{frame}
+
+\begin{frame}[label=sec-1-2]{Almost no special syntax, only data structures}
+\begin{center}
+\begin{tabular}{ll}
+Lists & \alert{`(1 2 3)}, \alert{`(fred kees piet)}\\
+Vectors & \alert{[1 2 3 4 5]}, \alert{[fred kees piet]}\\
+Maps & \alert{\{:a 1 :b 2 :b 3\}}, \alert{\{1 kees 2 piet\}}\\
+Code & \alert{(+ 1 2 3)}  \alert{;; => 6}\\
+Naming & \alert{(def n 10)}\\
+Lambda & \alert{(def plus-two (fn [a] (+ a *)))}\\
+ & \alert{(plus-two 2)} \alert{;; => 4}\\
+Quote & \alert{`(+ 1 2 3)} \alert{;; => (+ 1 2 3)}\\
+\end{tabular}
+\end{center}
+\begin{itemize}
+\item Parentheses!
+\item Code is data and data is code (homoiconicity)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label=sec-1-3]{Extensible}
+\begin{itemize}
+\item Macro expansion
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-1-4]{The Reader parses the Clojure data structures}
+\end{frame}
+\begin{frame}[fragile,label=sec-1-5]{Phase in compilation that transforms source code: "programs that write programs"}
+ \begin{minted}[bgcolor=white,frame=lines]{clojure}
+(defmacro unless [pred a b]
+  `(if (not ~pred) ~a ~b))
+
+;; usage:
+(unless false 
+ (println "Will print") 
+ (println "Will not print"))
+\end{minted}
+
+Not possible to implement as function.
+First form is not evaluated!
+\end{frame}
+
+\begin{frame}[label=sec-1-6]{Use the command line 1}
+\begin{itemize}
+\item Get the command line with: Start > Search for 'cmd'
+\item Basic commands (replace "<\ldots{}>" by what you want):
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-1-7]{Blocks}
+ \begin{block}{A normal block}
+\begin{itemize}
+\item Use \texttt{@@beamer: arbitrary-command@@} to include an arbitrary \LaTeX{}/Beamer command.
+\item Use \texttt{*test*} for \alert{alert}
+\item Use \texttt{/italics/} for \emph{italics}
+\item Use \texttt{C-c C-b} to change the type of block.
+\end{itemize}
+\end{block}
+\begin{alertblock}{An alert block}
+An altert block.
+\end{alertblock}
+\begin{example}["An example"]
+
+\end{example}
+\end{frame}
+
+\begin{frame}[label=sec-1-8]{Learn more:}
+\begin{itemize}
+\item Rich Hickey - Clojure made Simple: \url{https://youtu.be/VSdnJDO-xdg}
+\item Derek Slager - ClojureScript for Skeptics: \url{https://youtu.be/gsffg5xxFQI}
+\end{itemize}
+\end{frame}
+% Emacs 25.1.1 (Org mode 8.2.10)
+\end{document}

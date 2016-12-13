@@ -1,0 +1,79 @@
+#+TITLE:        What is so great about Clojure?
+#+AUTHOR:       Erwin Rooijakkers
+#+EMAIL:        erwin.rooijakkers@gmail.com
+#+DATE:         14-12-2016
+#+LANGUAGE:     en
+#+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
+#+OPTIONS:      d:nil todo:t pri:nil
+#+STARTUP:      beamer
+#+LATEX_HEADER: \usetheme{metropolis}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers - Alliander}
+#+LATEX_HEADER: \metroset{block=fill}
+
+** Personal journey
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/wizard.jpg]]
+
+* Clojure is a Lisp
+
+** What is so great about Lisp?
+#+begin_quotation
+"The most powerful programming language is Lisp. If you don't know Lisp (or its variant, Scheme), you don't know what it means for a programming language to be powerful and elegant. Once you learn Lisp, you will see what is lacking in most other languages." --- Richard Stallman
+#+end_quotation
+
+** Almost no special syntax, only data structures
+| Lists        | *`(1 2 3)*, *`(fred kees piet)*       |
+| Vectors      | *[1 2 3 4 5]*, *[fred kees piet]*     |
+| Maps         | *{:a 1 :b 2 :b 3}*, *{1 kees 2 piet}* |
+| Code         | *(+ 1 2 3)*  *;; => 6*                |
+| Naming       | *(def n 10)*                          |
+| Lambda       | *(def plus-two (fn [a] (+ a *)))*     |
+|              | *(plus-two 2)* *;; => 4*              |
+| Quote        | *`(+ 1 2 3)* *;; => (+ 1 2 3)*        |
+- Parentheses!
+- Code is data and data is code (homoiconicity)
+
+
+** Extensible
+
+- Macro expansion
+
+** The Reader parses the Clojure data structures
+** Phase in compilation that transforms source code: "programs that write programs"
+
+#+begin_src clojure
+(defmacro unless [pred a b]
+  `(if (not ~pred) ~a ~b))
+
+;; usage:
+(unless false 
+ (println "Will print") 
+ (println "Will not print"))
+#+end_src
+
+Not possible to implement as function.
+First form is not evaluated!
+
+** Use the command line 1
+- Get the command line with: Start > Search for 'cmd'
+- Basic commands (replace "<...>" by what you want):
+
+** Blocks
+*** A normal block
+- Use =@@beamer: arbitrary-command@@= to include an arbitrary LaTeX/Beamer command.
+- Use =*test*= for *alert*
+- Use =/italics/= for /italics/
+- Use =C-c C-b= to change the type of block.
+*** An alert block                                             :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+An altert block.
+*** "An example"                                :B_example:
+:PROPERTIES:
+:BEAMER_env: example
+:END:
+
+** Learn more:
+- Rich Hickey - Clojure made Simple: https://youtu.be/VSdnJDO-xdg
+- Derek Slager - ClojureScript for Skeptics: https://youtu.be/gsffg5xxFQI

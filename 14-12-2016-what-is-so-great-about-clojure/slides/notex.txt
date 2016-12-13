@@ -1,0 +1,67 @@
+INTERACTIE MET PUBLIEK
+
+Erwin, ik werk sinds een halfjaar bij MPARE.
+Duurzaamheid, mooi. Slimme meters, mooi.
+Maar Clojure is helemaal mooi.
+
+EuroClojure Conferentie Fantastisch
+Zoveel vets gehoord. De meetup ervoor ook. Unikernels tot Machine learning.
+Ga ik niet over hebben. Dacht eerst een introductie tot Clojure te doen
+
+#Uren bezig geweest om de presentatie in LaTeX te kunnen maken.
+#packages werkte niet mee et cetera.
+#Toen het eindelijk werkte realiseerde ik mij dat ik Alliander template had kunnen, en misschien zelfs moeten gebruiken.
+#Maar goed. Voor deze keer hierin. Ik hoop dat jullie het mooi vinden.
+
+Publiek interactie:
+Wie heeft er gehoord van Clokjure?
+Waar programmeren jullei in?
+
+Vier redenen waarom Clojure great is:
+Het is een Lisp.
+It is quite common, and easy, for Clojure programs to manipulate, transform and produce other Clojure programs.
+
+Het is data-georienteerd.
+Omhelst functioneel programmeren.
+
+Methodes voor tate management:
+Atoms
+STM
+
+
+Draait op de JVM en JavaScript runtime.
+
+DEMO:
+
+FIGWHEEL
+Code wijziging. Live code loading.
+bmi-calculator
+Hot code reloading in the browser
+
+State:
+re-bmi-data
+defonce...
+show
+macroexpand
+
+
+devcards, macros. How they work not interested right now.
+Display
+re-bmi-data
+bmi-calculator
+
+Java Interop
+
+Data orientation
+
+
+
+
+Het is een Lisp.
+
+Draait op de JVM en JavaScript runtime.
+
+Het is data-georienteerd.
+
+Omhelst functioneel programmeren.
+
