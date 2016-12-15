@@ -1,4 +1,4 @@
-#+TITLE:        What is so great about Clojure?
+#+TITLE:        Why Clojure?
 #+AUTHOR:       Erwin Rooijakkers
 #+EMAIL:        erwin.rooijakkers@gmail.com
 #+DATE:         14-12-2016
@@ -10,9 +10,15 @@
 #+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers - Alliander}
 #+LATEX_HEADER: \metroset{block=fill}
 
-** Personal journey
-#+ATTR_LATEX: width=\textwidth
-[[file:../images/wizard.jpg]]
+** Agenda
+
+- Why Clojure is great:
+  - It is a Lisp
+  - Data-oriented
+  - Embraces functional programming
+  - JVM + JavaScript runtime
+- Demo:
+  - Figwheel + Reagent
 
 * Clojure is a Lisp
 
@@ -21,10 +27,17 @@
 "The most powerful programming language is Lisp. If you don't know Lisp (or its variant, Scheme), you don't know what it means for a programming language to be powerful and elegant. Once you learn Lisp, you will see what is lacking in most other languages." --- Richard Stallman
 #+end_quotation
 
-** Almost no special syntax, only data structures
+** Parentheses
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/lisp_cycles.png]]
+
+(http://xkcd.com/297/)
+
+** Almost all syntax
 | Lists        | *`(1 2 3)*, *`(fred kees piet)*       |
 | Vectors      | *[1 2 3 4 5]*, *[fred kees piet]*     |
 | Maps         | *{:a 1 :b 2 :b 3}*, *{1 kees 2 piet}* |
+| Sets         | *#{1 2 3}*                            |
 | Code         | *(+ 1 2 3)*  *;; => 6*                |
 | Naming       | *(def n 10)*                          |
 | Lambda       | *(def plus-two (fn [a] (+ a *)))*     |
@@ -33,47 +46,103 @@
 - Parentheses!
 - Code is data and data is code (homoiconicity)
 
+** Parentheses
+#+begin_src clojure
+(+ 1 2 (* 3 4))
+#+end_src
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/ast.png]]
 
-** Extensible
-
-- Macro expansion
-
-** The Reader parses the Clojure data structures
-** Phase in compilation that transforms source code: "programs that write programs"
-
+** Manipulating the AST
 #+begin_src clojure
 (defmacro unless [pred a b]
   `(if (not ~pred) ~a ~b))
 
-;; usage:
-(unless false 
- (println "Will print") 
+;; Usage:
+(unless false
+ (println "Will print")
+ (println "Will not print"))
+
+;; Macro expansion:
+(if (not false)
+ (println "Will print")
  (println "Will not print"))
 #+end_src
 
-Not possible to implement as function.
-First form is not evaluated!
+** Programmable programming language
+- *unless* impossible to implement as function.
+- Second expression is not evaluated!
+- "programmable programming language"
+- Lisp can build any abstraction at all if you can define syntax and semantics for it.
+- Clojure has idiomatic ways of doing that and a small core (no Lisp Curse).
 
-** Use the command line 1
-- Get the command line with: Start > Search for 'cmd'
-- Basic commands (replace "<...>" by what you want):
+* Clojure is data oriented
 
-** Blocks
-*** A normal block
-- Use =@@beamer: arbitrary-command@@= to include an arbitrary LaTeX/Beamer command.
-- Use =*test*= for *alert*
-- Use =/italics/= for /italics/
-- Use =C-c C-b= to change the type of block.
-*** An alert block                                             :B_alertblock:
+** Clojure is data oriented
+#+begin_quotation
+"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." --- Alan Perlis
+#+end_quotation
+
+** Clojure is data oriented
+
+*** Rich Hickey time :B_alertblock:
 :PROPERTIES:
 :BEAMER_env: alertblock
 :END:
-An altert block.
-*** "An example"                                :B_example:
+https://youtu.be/VSdnJDO-xdg?t=49m8s
+
+* Clojure embraces functional programming
+
+** Functional programming
+
+- End of Moore's law
+- More cores
+- Distributed
+- Parallelism and concurrency
+- How can we adapt our programming practices to this future?
+- Parallelism and concurrency (impossibly) hard in some languages
+
+** Root of the problem
+- "*Non-determinism* caused by *concurrent threads* accessing *shared mutable* state."- Martin Odersky
+
+#+begin_src scala
+var x = 0
+async { x = x + 1 }
+async { x = x * 2 }
+// Can give 0, 1, 2
+#+end_src
+(Martin Odersky, "Working Hard to Keep It Simple" - OSCON Java 2011)
+
+** Functional programming
+- Parallel processing is a fact
+- *No mutable state* means no problem
+- Imperatively we think in variables and blocks of memory that change over *time*.
+- Functionally we think in *space*: I construct this, then that, then third things out of that.
+- Recursion
+- *Pure functions* are clearer to reason about
+** Immutable data structures - Structural sharing
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/immutable_data_structures.png]]
+- Algorithms ensure expected performance characteristics of data structure
+
+* Runs on JVM and JavaScript runtime
+
+** JVM and JavaScript
+- Boring is good.
+- Clojure and ClojureScript embrace host platforms.
+- Sequences implement the expected interfaces.
+- Interop with host.
+
+** Demo
+
+*** Figwheel and Reagent :B_alertblock:
 :PROPERTIES:
-:BEAMER_env: example
+:BEAMER_env: alertblock
 :END:
+...
 
 ** Learn more:
-- Rich Hickey - Clojure made Simple: https://youtu.be/VSdnJDO-xdg
+- Rich Hickey - Clojure, Made Simple: https://youtu.be/VSdnJDO-xdg
 - Derek Slager - ClojureScript for Skeptics: https://youtu.be/gsffg5xxFQI
+- Rich Hickey talks collection: http://bit.ly/1KQNzBr
+- Bret Victor - Inventing on Principle: https://vimeo.com/36579366

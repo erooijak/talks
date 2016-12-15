@@ -1,4 +1,4 @@
-% Created 2016-12-14 Wed 00:32
+% Created 2016-12-15 Thu 23:24
 \documentclass[presentation]{beamer}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
@@ -23,7 +23,7 @@
 \usetheme{default}
 \author{Erwin Rooijakkers}
 \date{14-12-2016}
-\title{What is so great about Clojure?}
+\title{Why Clojure?}
 \hypersetup{
   pdfkeywords={},
   pdfsubject={},
@@ -32,8 +32,20 @@
 
 \maketitle
 
-\begin{frame}[label=sec-0-1]{Personal journey}
-\includegraphics[width=.9\linewidth]{../images/wizard.jpg}
+\begin{frame}[label=sec-0-1]{Agenda}
+\begin{itemize}
+\item Why Clojure is great:
+\begin{itemize}
+\item It is a Lisp
+\item Data-oriented
+\item Embraces functional programming
+\item JVM + JavaScript runtime
+\end{itemize}
+\item Demo:
+\begin{itemize}
+\item Figwheel + Reagent
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \section{Clojure is a Lisp}
@@ -45,12 +57,19 @@
 \end{quotation}
 \end{frame}
 
-\begin{frame}[label=sec-1-2]{Almost no special syntax, only data structures}
+\begin{frame}[label=sec-1-2]{Parentheses}
+\includegraphics[width=.9\linewidth]{../images/lisp_cycles.png}
+
+(\url{http://xkcd.com/297/})
+\end{frame}
+
+\begin{frame}[label=sec-1-3]{Almost all syntax}
 \begin{center}
 \begin{tabular}{ll}
 Lists & \alert{`(1 2 3)}, \alert{`(fred kees piet)}\\
 Vectors & \alert{[1 2 3 4 5]}, \alert{[fred kees piet]}\\
 Maps & \alert{\{:a 1 :b 2 :b 3\}}, \alert{\{1 kees 2 piet\}}\\
+Sets & \alert{\#\{1 2 3\}}\\
 Code & \alert{(+ 1 2 3)}  \alert{;; => 6}\\
 Naming & \alert{(def n 10)}\\
 Lambda & \alert{(def plus-two (fn [a] (+ a *)))}\\
@@ -64,58 +83,124 @@ Quote & \alert{`(+ 1 2 3)} \alert{;; => (+ 1 2 3)}\\
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}[label=sec-1-3]{Extensible}
-\begin{itemize}
-\item Macro expansion
-\end{itemize}
+\begin{frame}[fragile,label=sec-1-4]{Parentheses}
+ \begin{minted}[bgcolor=white,frame=lines]{clojure}
+(+ 1 2 (* 3 4))
+\end{minted}
+\includegraphics[width=.9\linewidth]{../images/ast.png}
 \end{frame}
 
-\begin{frame}[label=sec-1-4]{The Reader parses the Clojure data structures}
-\end{frame}
-\begin{frame}[fragile,label=sec-1-5]{Phase in compilation that transforms source code: "programs that write programs"}
+\begin{frame}[fragile,label=sec-1-5]{Manipulating the AST}
  \begin{minted}[bgcolor=white,frame=lines]{clojure}
 (defmacro unless [pred a b]
   `(if (not ~pred) ~a ~b))
 
-;; usage:
-(unless false 
- (println "Will print") 
+;; Usage:
+(unless false
+ (println "Will print")
+ (println "Will not print"))
+
+;; Macro expansion:
+(if (not false)
+ (println "Will print")
  (println "Will not print"))
 \end{minted}
-
-Not possible to implement as function.
-First form is not evaluated!
 \end{frame}
 
-\begin{frame}[label=sec-1-6]{Use the command line 1}
+\begin{frame}[label=sec-1-6]{Programmable programming language}
 \begin{itemize}
-\item Get the command line with: Start > Search for 'cmd'
-\item Basic commands (replace "<\ldots{}>" by what you want):
+\item \alert{unless} impossible to implement as function.
+\item Second expression is not evaluated!
+\item "programmable programming language"
+\item Lisp can build any abstraction at all if you can define syntax and semantics for it.
+\item Clojure has idiomatic ways of doing that and a small core (no Lisp Curse).
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile,label=sec-1-7]{Blocks}
- \begin{block}{A normal block}
-\begin{itemize}
-\item Use \texttt{@@beamer: arbitrary-command@@} to include an arbitrary \LaTeX{}/Beamer command.
-\item Use \texttt{*test*} for \alert{alert}
-\item Use \texttt{/italics/} for \emph{italics}
-\item Use \texttt{C-c C-b} to change the type of block.
-\end{itemize}
-\end{block}
-\begin{alertblock}{An alert block}
-An altert block.
+\section{Clojure is data oriented}
+\label{sec-2}
+
+\begin{frame}[label=sec-2-1]{Clojure is data oriented}
+\begin{quotation}
+"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." --- Alan Perlis
+\end{quotation}
+\end{frame}
+
+\begin{frame}[label=sec-2-2]{Clojure is data oriented}
+\begin{alertblock}{Rich Hickey time}
+\url{https://youtu.be/VSdnJDO-xdg?t=49m8s}
 \end{alertblock}
-\begin{example}["An example"]
-
-\end{example}
 \end{frame}
 
-\begin{frame}[label=sec-1-8]{Learn more:}
+\section{Clojure embraces functional programming}
+\label{sec-3}
+
+\begin{frame}[label=sec-3-1]{Functional programming}
 \begin{itemize}
-\item Rich Hickey - Clojure made Simple: \url{https://youtu.be/VSdnJDO-xdg}
+\item End of Moore's law
+\item More cores
+\item Distributed
+\item Parallelism and concurrency
+\item How can we adapt our programming practices to this future?
+\item Parallelism and concurrency (impossibly) hard in some languages
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,label=sec-3-2]{Root of the problem}
+ \begin{itemize}
+\item "\alert{Non-determinism} caused by \alert{concurrent threads} accessing \alert{shared mutable} state."- Martin Odersky
+\end{itemize}
+
+\begin{minted}[bgcolor=white,frame=lines]{scala}
+var x = 0
+async { x = x + 1 }
+async { x = x * 2 }
+// Can give 0, 1, 2
+\end{minted}
+(Martin Odersky, "Working Hard to Keep It Simple" - OSCON Java 2011)
+\end{frame}
+
+\begin{frame}[label=sec-3-3]{Functional programming}
+\begin{itemize}
+\item Parallel processing is a fact
+\item No mutable state means no problem
+\item Imperatively we think in variables and blocks of memory that change over \alert{time}.
+\item Functionally we think in \alert{space}: I construct his, then that, then third things out of that.
+\item Recursion
+\item \alert{Pure functions} are clearer to reason about
+\end{itemize}
+\end{frame}
+\begin{frame}[label=sec-3-4]{Immutable data structures - Structural sharing}
+\includegraphics[width=.9\linewidth]{../images/immutable_data_structures.png}
+\begin{itemize}
+\item Algorithms ensure expected performance characteristics of data structure
+\end{itemize}
+\end{frame}
+
+\section{Runs on JVM and JavaScript runtime}
+\label{sec-4}
+
+\begin{frame}[label=sec-4-1]{JVM and JavaScript}
+\begin{itemize}
+\item Boring is good.
+\item Clojure and ClojureScript embrace host platforms.
+\item Sequences implement the expected interfaces.
+\item Interop with host.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=sec-4-2]{Demo}
+\begin{alertblock}{Figwheel and Reagent}
+\ldots{}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[label=sec-4-3]{Learn more:}
+\begin{itemize}
+\item Rich Hickey - Clojure, Made Simple: \url{https://youtu.be/VSdnJDO-xdg}
 \item Derek Slager - ClojureScript for Skeptics: \url{https://youtu.be/gsffg5xxFQI}
+\item Rich Hickey talks collection: \url{http://bit.ly/1KQNzBr}
+\item Bret Victor - Inventing on Principle: \url{https://vimeo.com/36579366}
 \end{itemize}
 \end{frame}
 % Emacs 25.1.1 (Org mode 8.2.10)
