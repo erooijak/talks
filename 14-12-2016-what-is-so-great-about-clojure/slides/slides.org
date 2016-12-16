@@ -18,7 +18,7 @@
   - Embraces functional programming
   - JVM + JavaScript runtime
 - Demo:
-  - Figwheel + Reagent
+  - Figwheel + Devcards + Reagent
 
 * Clojure is a Lisp
 
@@ -33,25 +33,25 @@
 
 (http://xkcd.com/297/)
 
-** Almost all syntax
-| Lists        | *`(1 2 3)*, *`(fred kees piet)*       |
-| Vectors      | *[1 2 3 4 5]*, *[fred kees piet]*     |
-| Maps         | *{:a 1 :b 2 :b 3}*, *{1 kees 2 piet}* |
-| Sets         | *#{1 2 3}*                            |
-| Code         | *(+ 1 2 3)*  *;; => 6*                |
-| Naming       | *(def n 10)*                          |
-| Lambda       | *(def plus-two (fn [a] (+ a *)))*     |
-|              | *(plus-two 2)* *;; => 4*              |
-| Quote        | *`(+ 1 2 3)* *;; => (+ 1 2 3)*        |
-- Parentheses!
-- Code is data and data is code (homoiconicity)
-
 ** Parentheses
 #+begin_src clojure
 (+ 1 2 (* 3 4))
 #+end_src
 #+ATTR_LATEX: width=\textwidth
 [[file:../images/ast.png]]
+
+** Almost all syntax
+| Lists         | *`(1 2 3)*, *`(fred kees piet)*         |
+| Vectors       | *[1 2 3 4 5]*, *[fred kees piet]*       |
+| Maps          | *{:a 1, :b 2, :b 3}*, *{1 kees 2 piet}* |
+| Sets          | *#{1 2 3}*                              |
+| Code          | *(+ 1 2 3)*  *;; => 6*                  |
+| Special forms | *def* *if* *quote* *let* ...           |
+| Naming        | *(def n 10)*                            |
+| Lambda        | *(def plus-two (fn [a] (+ a 2)))*       |
+|               | *(plus-two 2)* *;; => 4*                |
+| Quote         | *`(+ 1 2 3)* *;; => (+ 1 2 3)*          |
+- Code is data and data is code (homoiconicity)
 
 ** Manipulating the AST
 #+begin_src clojure
@@ -70,11 +70,11 @@
 #+end_src
 
 ** Programmable programming language
-- *unless* impossible to implement as function.
+- *unless* impossible to implement as function
 - Second expression is not evaluated!
 - "programmable programming language"
 - Lisp can build any abstraction at all if you can define syntax and semantics for it.
-- Clojure has idiomatic ways of doing that and a small core (no Lisp Curse).
+- Clojure has idiomatic ways for doing things and a small core (no Lisp Curse)
 
 * Clojure is data oriented
 
@@ -116,8 +116,8 @@ async { x = x * 2 }
 ** Functional programming
 - Parallel processing is a fact
 - *No mutable state* means no problem
-- Imperatively we think in variables and blocks of memory that change over *time*.
-- Functionally we think in *space*: I construct this, then that, then third things out of that.
+- Imperatively we think in variables and blocks of memory that change over *time*
+- Functionally we think in *space*: I construct this, then that, then third things out of that
 - Recursion
 - *Pure functions* are clearer to reason about
 ** Immutable data structures - Structural sharing
@@ -128,10 +128,10 @@ async { x = x * 2 }
 * Runs on JVM and JavaScript runtime
 
 ** JVM and JavaScript
-- Boring is good.
-- Clojure and ClojureScript embrace host platforms.
-- Sequences implement the expected interfaces.
-- Interop with host.
+- Boring is good
+- Clojure and ClojureScript embrace host platforms
+- Sequences implement the expected interfaces
+- Interop with host
 
 ** Demo
 
@@ -141,8 +141,15 @@ async { x = x * 2 }
 :END:
 ...
 
-** Learn more:
+** Learn more
 - Rich Hickey - Clojure, Made Simple: https://youtu.be/VSdnJDO-xdg
 - Derek Slager - ClojureScript for Skeptics: https://youtu.be/gsffg5xxFQI
 - Rich Hickey talks collection: http://bit.ly/1KQNzBr
 - Bret Victor - Inventing on Principle: https://vimeo.com/36579366
+- Setting up Clojure: http://braveclojure.com/getting-started/
+
+** Exercises
+
+-	http://www.4clojure.com/problems
+-	http://clojurekoans.com
+-	https://projecteuler.net
