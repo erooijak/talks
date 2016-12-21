@@ -12,11 +12,13 @@ Clone the repository
     git clone https://github.com/erooijak/talks
     
 Build Metropolis theme:
+
     git clone https://github.com/matze/mtheme
     cd mtheme/
     make install # install theme globally
     
 Build theme:
+
     # Navigate directory containing slides.org
     make slides.pdf
     
