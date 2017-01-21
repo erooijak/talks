@@ -1,0 +1,339 @@
+#+TITLE:        Blockchain and Beyond
+#+AUTHOR:       Erwin Rooijakkers
+#+EMAIL:        erwin.rooijakkers@gmail.com
+#+DATE:         21-01-2017
+#+LANGUAGE:     en
+#+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
+#+OPTIONS:      d:nil todo:t pri:nil
+#+STARTUP:      beamer
+#+LATEX_HEADER: \usetheme{metropolis}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers - Blockchain and Beyond}
+#+LATEX_HEADER: \metroset{block=fill}
+
+** Agenda
+
+- Consensus
+  - Distributed consensus
+- Blockchain
+  - What is the blockchain?
+  - Hashing, public key cryptography, P2P-networking, consensus algorithms, Merkle trees
+- *Bitcoin*
+- Meditation session
+- *Ethereum*
+  - White paper
+  - Smart contracts
+- Blockchain applications
+- Beyond
+
+* Consensus
+** Consensus
+- How to *confidently* and *securely* transfer *values* (e.g. money or digital asset)?
+- Use third-party ledger (e.g. your bank)???
+- *No*, we want *distributed consensus*
+- And a *non-refutable*, *uncompromisable* and *unbreakable record* of data
+* The blockchain
+** What is the blockchain?
+#+begin_quotation
+"A shared, programmable, cryptographically secure and therefore trusted ledger
+which no single user controls and which can be inspected by everyone." -- Klaus
+Schwab (Chairman World Economic Forum)
+#+end_quotation
+
+** What is the second-generation blockchain?
+#+begin_quotation
+"A programming language that allows users to write more sophisticated smart
+contracts [more complex applications involving having digital assets being
+directly controlled by a piece of code implementing arbitrary rules, Ethereum
+White Paper], thus creating invoices that pay themselves when a shipment arrives
+or share certificates which automatically send their owners dividends if profits
+reach a certain level." (The Economist)
+#+end_quotation
+
+** What is the blockchain?
+- Two kinds of *records*:
+  - Transactions
+  - Blocks: batches of *valid transactions* that are hashed and encoded into a *Merkle tree*
+- Each block includes the *hash* of the *prior* block in the blockchain, linking the two.
+- *Decentralized* (eliminate risk of data held centrally)
+- Every *node* or *miner* has whole copy
+  - No *centralized* "official" copy
+- Data is *incorruptible*
+- *Quality* by massive data *replication* and *computational trust*
+** P2P networking
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/p2p.png]]
+
+** Public key cryptography
+
+- A *public key*
+  - (a long, randomly-generated string of numbers) is an address on the blockchain. Bitcoins sent across the network are recorded as belonging to that address.
+- A *private key* is like a password that gives its owner access to their digital assets or otherwise interact with the various capabilities that blockchains now support.
+
+*** Public Key Cryptography - Computerphile :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/GSIDS_lvRv4
+
+
+- A *public key*
+  - (a long, randomly-generated string of numbers) is an address on the blockchain. Bitcoins sent across the network are recorded as belonging to that address.
+- A *private key* is like a password that gives its owner access to their digital assets or otherwise interact with the various capabilities that blockchains now support.
+
+*** Public Key Cryptography - Computerphile :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/GSIDS_lvRv4
+
+** Hashing
+- A *hash function* is any function that can be used to map data of arbitrary size to data of fixed size
+
+** Consensus
++ *Proof of work*: the current difficulty in bitcoin network requires miners to try quadrillions of times before finding a nonce that fits.
+  - *hashing* can provide vastly different outputs on minor changes
++ *Proof of stake*: mining is done by stakeholders in the ecosystem who have the strongest incentives to be good stewards of the system. (E.g., by having large amount of currency.)
+** Merkle tree
+#+begin_quotation
+"Merkle trees are a fundamental part of what makes blockchains tick. Although it
+is definitely theoretically possible to make a blockchain without Merkle trees,
+simply by creating giant block headers that directly contain every transaction,
+doing so poses large scalability challenges that arguably puts the ability to
+trustlessly use blockchains out of the reach of all but the most powerful
+computers in the long term. Thanks to Merkle trees, it is possible to build
+Ethereum nodes that run on all computers and laptops large and small, smart
+phones, and even internet of things devices." (Merkling in Ethereum)
+#+end_quotation
+
+** Merkle tree (Wikipedia)
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/Hash_Tree.png]]
+
+** Quiz
+- Demonstrating that a leaf node is a part of the given hash tree requires processing an amount of data proportional to the *logarithm of the number of nodes of the tree*.
+*** Quiz :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+Why logarithmic?
+
+** Merkle proof
+- Someone reading the proof can verify that the hashing, at least for that branch, is consistent going all the way up the tree, and therefore that the given chunk actually is at that position in the tree.
+- If a *malicious user* attempts to swap in a *fake transaction* into the bottom of a Merkle tree, this change will cause a change in the node above, and then a change in the node above that, finally *changing the root of the tree and therefore the hash of the block*, causing the protocol to register it as a completely different block (almost certainly with an invalid *proof of work*).
+** Video - ChainThat
+
+*** Merkle trees and hashing :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/lik9aaFIsl4
+
+** What is a Merkle proof? (Quora)
+
+#+ATTR_LATEX: width=\textwidth
+file:../images/merkle_proof.png
+
+*** Quiz :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+What is a *hash collision*?
+
+* Bitcoin
+** What is Bitcoin?
+- Managing ownership
+  - through *public key cryptography*
+  - with *consensus algorithm* for keeping track of who owns coins (known as "*proof of work*")
+
+** The first blockchain
+- 2008
+- The first blockchain
+- Solved the *double spending problem*
+- High fault-tolerance for *Byzantine Generals' Problem*
+- *Public ledger*
+- Uses *Merkle proofs* in order to store the transactions in every block
+- Decentralized mechanism for *emergent consensus*
+  - artifact of the asynchronous interaction of thousands of independent nodes, all following simple rules.
+** Video - Computerphile
+*** Bitcoin - Computerphile :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+Bitcoin: https://youtu.be/JyxRH18YlpA
+
+Problems: https://youtu.be/s2XHyzPA9Zc
+** The Bitcoin blockchain
+
+#+ATTR_LATEX: width=\textwidth
+file:../images/mining.jpeg
+
+(https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/)
+
+** The Bitcoin blockchain
+- Full node
+  - one that stores and processes the entirety of every block (more than one GB a month added)
+- Light node
+  - *Simplified payment verification* (SPV)
+- Instead of downloading every transaction, *light clients* only download the *the chain of block headers*
+  - 80 bytes
+- Verification by *Merkle proof*
+** Problems with the Bitcoin blockchain
+- *Follow the money*
+- Consensus Attacks
+- Blockchain forks
+  - Two candidate blocks compete to form longest blockchain
+  -  As both miners discover a solution for their respective candidate blocks, they immediately broadcast their own "winning" block to their immediate neighbors who begin propagating the block across the network.
+- *Light clients* cannot prove anything about the currents state, like:
+  - Digital asset holdings; Name registrations; The status of financial contracts; How many bitcoins do you have right now?
+- You might need to authenticate *the entire chain*!
+- Ethereum takes the concept one step further
+
+* Meditation session
+* Ethereum
+** Ethereum (1)
+#+begin_quotation
+"The Ethereum protocol was originally conceived as an upgraded version of a
+cryptocurrency, providing advanced features such as on-blockchain escrow,
+withdrawal limits, financial contracts, gambling markets and the like via a
+highly generalized programming language. The Ethereum protocol would not
+"support" any of the applications directly, but the existence of a
+Turing-complete programming language means that arbitrary contracts can
+theoretically be created for any transaction type or application."
+#+end_quotation
+
+** Ethereum (2)
+#+begin_quotation
+"What is more interesting about Ethereum, however, is that the Ethereum protocol moves far
+beyond just currency. Protocols around decentralized file storage, decentralized
+computation and decentralized prediction markets, among dozens of other such
+concepts, have the potential to substantially increase the efficiency of the
+computational industry, and provide a massive boost to other peer-to-peer
+protocols by adding for the first time an economic layer. Finally, there is also
+a substantial array of applications that have nothing to do with money at all."
+(Ethereum White Paper)
+#+end_quotation
+** Videos - Ethereum
+*** Ethereum the World Computer :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/j23HnORQXvs
+
+** Three Merkle threes per block header
+- *Transactions* tree
+- *Receipts* tree
+- *State* tree
+- Unlike transaction history, state can be *updated*
+- Not a *Merkle (binary) tree*, but a *Patricia tree*
+  - New root value needs to be calculated after insertion, update, or delete.
+  - *Bounded depth* (against DDOS [denial of service] attacks)
+  - *16 children* per node
+  - Root value only *depends on data*, not on *order*
+  - *path* trough the tree towards particularly value is encoded
+
+** Facilitates things like
+- Has this transaction been included in a particular block? (*transaction tree*)
+- Tell me all instances of an event of type X (eg. a crowdfunding contract reaching its goal) emitted by this address in the past 30 days (*receipt three*)
+- What is the current balance of my account? (*state tree*)
+- Does this account exist? (*state tree*)
+- Pretend to run this transaction on this contract. What would the output be? (*state tree, special!*)
+  - *Merkle state transition proof*
+
+** Merkle state transition proof
+
+- If you run transaction *T* on the state with root *S*, the result will be a state with root *S*, with log *L* and output *O*”
+- “output” exists as a concept in Ethereum because every transaction is a function call.
+
+- Enables the coding of *smart contracts* that will execute when specified conditions are met.
+- *Extensible programming instructions* which both define and execute an agreement.
+- Ethereum is an open source blockchain project that is built specifically to realize this possibility by implementing a *Turing-complete* programming language capability to implement such contracts
+
+** Serpent
+
+- Token System
+
+#+begin_src python
+def send(to, value):
+    if self.storage[msg.sender] >= value:
+       self.storage[msg.sender] =
+               self.storage[msg.sender] - value
+       self.storage[to] =
+               self.storage[to] + value
+#+end_src
+
+** Serpent
+
+- A basic smart contract for a name registration system (e.g., like DNS, used in mapping domain names to IP-addresses)
+
+#+begin_src python
+def register(name, value):
+    if !self.storage[name]:
+      self.storage[name] = value
+#+end_src
+- All it is is a *database inside the Ethereum network* that can be added to, but not modified or removed from
+  - *Immutability*
+* Applications
+** The immense potential
+#+begin_quotation
+"With blockchain, we can imagine a world in which contracts are embedded in
+digital code and stored in transparent, shared databases, where they are
+protected from deletion, tampering, and revision. In this world every agreement,
+every process, every task, and every payment would have a digital record and
+signature that could be identified, validated, stored, and shared.
+Intermediaries like lawyers, brokers, and bankers might no longer be necessary.
+Individuals, organizations, machines, and algorithms would freely transact and
+interact with one another with little friction. This is the immense potential of
+blockchain." (Harvard Business Review, 2017)
+#+end_quotation
+
+** Applications currently
+- Cryptocurrencies
+- Georgia: blockchain based *property-*registry
+- Factom as a *distributed registry*
+- Gems for *decentralized messaging*
+- MaidSafe for *decentralized applications*
+- Storj for a *distributed cloud*
+- Tezos for *decentralized voting*
+- Online *voting*
+- *Medical records*
+- Smart contracts (reduce moral hazards)
+- Identity management
+- http://www.electricchain.org/
+- ...
+
+** Future
+*** Vitalik Buterin explains Ethereum :B_alertblock:
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/TDGq4aeevgY
+** Sustainability
+- Smart energy
+- *Virtual power plants* (VPPs)
+  - represent energy generating resources that are connected across a smart grid but *that aren’t necessarily concentrated in one central location*, such as traditional power plants
+** Sustainability
+
+#+begin_quotation
+"Distributed energy is really about generating your own energy, being self-reliant, selling excess energy to others."
+#+end_quotation
+
+#+begin_quotation
+"Distributed energy is really about generating your own energy, being self-reliant, selling excess energy to others."
+"Blockchain is not only useful in moving money, it’s useful in moving any asset in a very transparent and reliable way,"
+#+end_quotation
+** Problems with Ethereum
+- *Scalability*
+- *Centralization* risk (because of growth of blockchain only few organisations with full node)
+
+* Demo
+** Sources
+
+- https://en.wikipedia.org/wiki/Blockchain_(database)
+- https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/
+- https://monax.io/explainers/permissioned_blockchains/
+- https://www.linkedin.com/pulse/consensus-mechanisms-used-blockchain-ronald-chan
+- https://github.com/ethereum/wiki/wiki/White-Paper
+
+** To watch
+- http://www.ted.com/talks/don_tapscott_how_the_blockchain_is_changing_money_and_business
+- https://www.youtube.com/channel/UC6rYoXJ_3BbPyWx_GQDDRRQ
