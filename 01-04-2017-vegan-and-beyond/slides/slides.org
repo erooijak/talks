@@ -1,0 +1,90 @@
+#+TITLE:        Vegan en Beyond
+#+AUTHOR:       Erwin Rooijakkers, Jeroen Bruijn, Ruud Hendrikx \& Elisa Achterberg
+#+EMAIL:        erwin.rooijakkers@gmail.com
+#+DATE:         01-04-2017
+#+LANGUAGE:     en
+#+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
+#+OPTIONS:      d:nil todo:t pri:nil
+#+STARTUP:      beamer
+#+LATEX_HEADER: \usetheme{metropolis}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Jeroen Bruijn, Ruud Hendrikx, Elisa Achterberg \& Erwin Rooijakkers - Vegan en Beyond}
+#+LATEX_HEADER: \metroset{block=fill}
+
+** Agenda
+
+- Dierenleed
+- Marketing
+- Meditation session
+- Gezondheid
+- Beyond
+
+* Dierenleed
+
+** Animal Rights filmt mishandeling van varkens in slachthuis Tielt (23 maart 2017)
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://www.animalrights.nl/animal-rights-filmt-mishandeling-van-varkens-slachthuis-tielt
+
+** Earthlings
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/earthlings.png]]
+
+*** Earthlings
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/ms7yoerGaPU?list=PLv7whYPHSlwTVb06qz0XrrLikH40cGdhs
+
+** Melk?
+*** DAIRY IS F**KING SCARY! The industry explained in 5 minutes 
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/UcN7SGGoCNI
+
+** Eieren?
+*** What's Wrong With Eggs? The Truth About The Egg Industry
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/utPkDP3T7R4
+
+** Biologisch? Organisch?
+
+*** Verschil tussen biologisch en scharrel
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://www.bio-plus.nl/consument/faq/antwoorden/wat-is-het-verschil-tussen-biologisch-en-scharrel/
+
+** Biologisch? Organisch?
+*** An Unnatural Lifespan
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+http://newinfographic.com/wp-content/uploads/2013/09/slaughtering-animals-unnatural-life-span.jpg
+
+* Marketing
+
+* Meditation session
+
+* Gezondheid
+
+** Anatomie
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/anatomy.jpeg]]
+
+** Forks Over Knives
+#+begin_quotation
+"The feature film Forks Over Knives examines the profound claim that most, if not all, of the degenerative diseases that afflict us can be controlled, or even reversed, by rejecting animal-based and processed foods."
+#+end_quotation
+
+*** Forks Over Knives
+:PROPERTIES:
+:BEAMER_env: alertblock
+:END:
+https://youtu.be/cgTnd3QPiBY
+
+** Beyond
+- https://youtu.be/pmAYUf3aemg (Gary Yourofsky)
