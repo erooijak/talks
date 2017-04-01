@@ -1,4 +1,4 @@
-#+TITLE:        Vegan en Beyond
+#+TITLE:        Vegan en Verder
 #+AUTHOR:       Erwin Rooijakkers, Jeroen Bruijn, Ruud Hendrikx \& Elisa Achterberg
 #+EMAIL:        erwin.rooijakkers@gmail.com
 #+DATE:         01-04-2017
@@ -7,7 +7,7 @@
 #+OPTIONS:      d:nil todo:t pri:nil
 #+STARTUP:      beamer
 #+LATEX_HEADER: \usetheme{metropolis}
-#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Jeroen Bruijn, Ruud Hendrikx, Elisa Achterberg \& Erwin Rooijakkers - Vegan en Beyond}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Jeroen Bruijn, Ruud Hendrikx, Elisa Achterberg \& Erwin Rooijakkers - Vegan en Verder}
 #+LATEX_HEADER: \metroset{block=fill}
 
 ** Agenda
@@ -16,7 +16,7 @@
 - Marketing
 - Meditation session
 - Gezondheid
-- Beyond
+- Verder
 
 * Dierenleed
 
@@ -86,5 +86,5 @@ http://newinfographic.com/wp-content/uploads/2013/09/slaughtering-animals-unnatu
 :END:
 https://youtu.be/cgTnd3QPiBY
 
-** Beyond
+** Verder
 - https://youtu.be/pmAYUf3aemg (Gary Yourofsky)
