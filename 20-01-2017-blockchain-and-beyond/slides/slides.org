@@ -1,5 +1,5 @@
 #+TITLE:        Blockchain and Beyond
-#+AUTHOR:       Erwin Rooijakkers
+#+AUTHOR:       Erwin Rooijakkers, Jeroen Bruijn, Ruud Hendrikx \& Elisa Aachterberg
 #+EMAIL:        erwin.rooijakkers@gmail.com
 #+DATE:         21-01-2017
 #+LANGUAGE:     en
@@ -7,7 +7,7 @@
 #+OPTIONS:      d:nil todo:t pri:nil
 #+STARTUP:      beamer
 #+LATEX_HEADER: \usetheme{metropolis}
-#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers - Blockchain and Beyond}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Erwin Rooijakkers, Jeroen Bruijn, Ruud Hendrikx \& Elisa Aachterberg - Blockchain and Beyond}
 #+LATEX_HEADER: \metroset{block=fill}
 
 ** Agenda
