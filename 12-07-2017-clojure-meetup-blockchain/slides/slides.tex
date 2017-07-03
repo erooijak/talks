@@ -1,0 +1,75 @@
+% Created 2017-07-03 Mon 11:11
+\documentclass[presentation]{beamer}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\usetheme{metropolis}
+\setbeamertemplate{frame footer}{Erwin Rooijakkers}
+\metroset{block=fill}
+\usetheme{default}
+\author{Erwin Rooijakkers}
+\date{27-06-2017}
+\title{ClojureScript for writing a decentralized app on the Ethereum blockchain}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 25.1.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+
+\begin{frame}[label=sec-0-1]{Agenda}
+\alert{ClojureScript for writing a decentralized app on the Ethereum blockchain}
+
+Blockchain is a decentralised peer-to-peer distributed ledger without the need
+for a trusted third party. Bitcoin is a first application of blockchain
+technology, limited to the exchange of currency. Ethereum is a later blockchain
+with a Turing complete programming language on top in which so-called “Smart
+Contracts” can be programmed.
+
+Some expect blockchain technology to cut out the intermediary in various fields
+like trading, banking, energy exchange, voting, leasing, and so on. As professor
+Egbert-Jan Sol put it on a recent blockchain meetup: “What robots did for the
+work force, blockchain will do for the office force.”
+
+Via ClojureScript wrappers around the Ethereum JavaScript API web3.js it’s
+possible to create a decentralized app (dapp) in ClojureScript. A great example
+of a dapp fully written in ClojureScript is \url{https://ethlance.com/}. Inspired by
+this project I am writing a simple website that interacts with a smart contract.
+
+In this presentation I want to tell about blockchain and the way to interact
+with it using ClojureScript. Then I will demo a simple application and answer
+questions.
+\end{frame}
+
+\section{Blockchain}
+\label{sec-1}
+
+Video?
+
+\url{https://consensys.net/ethereum/}
+
+\begin{frame}[label=sec-1-1]{Cryptographic Tokens and Addresses:}
+\end{frame}
+\begin{frame}[label=sec-1-2]{Peer-to-peer Networking}
+\end{frame}
+\begin{frame}[label=sec-1-3]{Consensus Formation Algorithm}
+\end{frame}
+\begin{frame}[label=sec-1-4]{Turing Complete Virtual Machine}
+\end{frame}
+% Emacs 25.1.1 (Org mode 8.2.10)
+\end{document}

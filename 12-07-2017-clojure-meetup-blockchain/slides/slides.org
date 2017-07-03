@@ -1,0 +1,46 @@
+#+TITLE:        ClojureScript for writing a decentralized app on the Ethereum blockchain
+#+AUTHOR:       Erwin Rooijakkers
+#+EMAIL:        erwin.rooijakkers@alliander.com
+#+DATE:         27-06-2017
+#+LANGUAGE:     en
+#+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
+#+OPTIONS:      d:nil todo:t pri:nil
+#+STARTUP:      beamer
+#+LATEX_HEADER: \usetheme{metropolis}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{Erwin Rooijakkers}
+#+LATEX_HEADER: \metroset{block=fill}
+
+** Agenda
+
+*ClojureScript for writing a decentralized app on the Ethereum blockchain*
+
+Blockchain is a decentralised peer-to-peer distributed ledger without the need
+for a trusted third party. Bitcoin is a first application of blockchain
+technology, limited to the exchange of currency. Ethereum is a later blockchain
+with a Turing complete programming language on top in which so-called “Smart
+Contracts” can be programmed.
+
+Some expect blockchain technology to cut out the intermediary in various fields
+like trading, banking, energy exchange, voting, leasing, and so on. As professor
+Egbert-Jan Sol put it on a recent blockchain meetup: “What robots did for the
+work force, blockchain will do for the office force.”
+
+Via ClojureScript wrappers around the Ethereum JavaScript API web3.js it’s
+possible to create a decentralized app (dapp) in ClojureScript. A great example
+of a dapp fully written in ClojureScript is https://ethlance.com/. Inspired by
+this project I am writing a simple website that interacts with a smart contract.
+
+In this presentation I want to tell about blockchain and the way to interact
+with it using ClojureScript. Then I will demo a simple application and answer
+questions.
+
+* Blockchain
+
+Video?
+
+https://consensys.net/ethereum/
+
+** Cryptographic Tokens and Addresses
+** Peer-to-peer Networking
+** Consensus Formation Algorithm
+** Turing Complete Virtual Machine
