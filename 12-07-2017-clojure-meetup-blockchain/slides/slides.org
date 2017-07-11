@@ -1,7 +1,7 @@
-#+TITLE:        ClojureScript for writing a decentralized app on the Ethereum blockchain
+#+TITLE:        Blockchain, Ethereum, ClojureScript, Fleet
 #+AUTHOR:       Erwin Rooijakkers
-#+EMAIL:        erwin.rooijakkers@alliander.com
-#+DATE:         27-06-2017
+#+EMAIL:        erwinrooijakkers@gmail.com
+#+DATE:         12-07-2017
 #+LANGUAGE:     en
 #+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
 #+OPTIONS:      d:nil todo:t pri:nil
@@ -10,37 +10,151 @@
 #+LATEX_HEADER: \setbeamertemplate{frame footer}{Erwin Rooijakkers}
 #+LATEX_HEADER: \metroset{block=fill}
 
-** Agenda
-
-*ClojureScript for writing a decentralized app on the Ethereum blockchain*
-
-Blockchain is a decentralised peer-to-peer distributed ledger without the need
-for a trusted third party. Bitcoin is a first application of blockchain
-technology, limited to the exchange of currency. Ethereum is a later blockchain
-with a Turing complete programming language on top in which so-called “Smart
-Contracts” can be programmed.
-
-Some expect blockchain technology to cut out the intermediary in various fields
-like trading, banking, energy exchange, voting, leasing, and so on. As professor
-Egbert-Jan Sol put it on a recent blockchain meetup: “What robots did for the
-work force, blockchain will do for the office force.”
-
-Via ClojureScript wrappers around the Ethereum JavaScript API web3.js it’s
-possible to create a decentralized app (dapp) in ClojureScript. A great example
-of a dapp fully written in ClojureScript is https://ethlance.com/. Inspired by
-this project I am writing a simple website that interacts with a smart contract.
-
-In this presentation I want to tell about blockchain and the way to interact
-with it using ClojureScript. Then I will demo a simple application and answer
-questions.
-
 * Blockchain
 
-Video?
+** What?
+#+begin_quotation
+"A *shared*, programmable, cryptographically secure and therefore trusted ledger
+*which no single user controls* and *which can be inspected by everyone*."
 
-https://consensys.net/ethereum/
+-- Klaus Schwab (Chairman World Economic Forum)
+#+end_quotation
 
-** Cryptographic Tokens and Addresses
-** Peer-to-peer Networking
-** Consensus Formation Algorithm
-** Turing Complete Virtual Machine
+# Useful for cutting out trusted third parties, like banks, and other institutions
+# professor Egbert-Jan Sol (on a recent blockchain meetup):
+# “What robots did for the work force, blockchain will do for the office force.”
+
+** Four pillars
+- Cryptographic Tokens and Addresses
+- P2P Networking
+- Consensus Formation Algorithm
+- Virtual Machine
+
+# ** What is the blockchain?
+# - Two kinds of *records*:
+#   - Transactions
+#   - Blocks: batches of *valid transactions* that are hashed and encoded into a *Merkle tree*
+# - Each block includes the *hash* of the *prior* block in the blockchain, linking the two.
+# - *Decentralized* (eliminate risk of data held centrally)
+# - Every *node* or *miner* has whole copy
+#   - No *centralized* "official" copy
+# - Data is *incorruptible*
+# - *Quality* by massive data *replication* and *computational trust*
+
+** This.
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/merkle.jpg]]
+
+(Source: https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/)
+
+# Bitcoin state: transactions of Bitcoin
+# Ethereum state: transactions of Ether, STATE OF VM
+
+** Consensus
+- *Proof of Work (PoW)*: the current difficulty in the Bitcoin network requires
+  miners to try quadrillions of times before finding a nonce that fits.
+  (because *hashing* can provide vastly different outputs on minor changes)
+- *Proof of stake (PoS)*: mining is done by stakeholders in the ecosystem who
+  have the strongest incentives to be good stewards of the system. (E.g., by
+  setting coins aside for a longer period as stake.)
+
+* Smart Contracts
+
+** Model
+
+# Wanted to make a Rich Hickey joke related to OO, but it is not.
+- Stateless webservices
+- Contract-oriented programming
+- Gas fees
+# 1,5 million euro for a GB in March, lower gas price
+
+** Stateless web services
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/awslambda.png]]
+
+# Correct: stateless web services
+
+# IP -> address
+# http request -> transaction
+# security call-by-call
+# Microservices Architectures
+
+# Slow: waiting for blocks
+# Pay gas
+
+** Contract-oriented programming
+
+#+begin_src javascript
+contract HelloSayerFactory {
+
+  function create() returns (address) {
+    return address(new HelloSayer());
+  }
+
+  function delete(address addr){
+    HelloSayer(addr).remove();
+  }
+
+}
+#+end_src
+
+** Tools
+- geth: (Go Ethereum) *cli* for running full Ethereum node, exposes RPC
+- web3.js: Ethereum compatible *JavaScript API* which implements the Generic *JSON RPC spec*
+- solc: JavaScript bindings for Solidity compiler (creates *ABI* and *BIN*)
+
+** MetaMask (also: Mist; Parity)
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/metamask.png]]
+
+# - *Prompt user* when having to sign
+
+* Fleet
+** Why ClojureScript + blockchain
+- *Blockchain*
+- *ClojureScript*!
+  - Reagent
+  - Figwheel
+
+** Code inspiration and big help
+- https://medium.com/@matus.lestan
+- https://github.com/district0x/ethlance
+- https://ethlance.com/\#/job/128
+
+[[file:../images/madvas.png]]
+** Idea
+- Elisa Achterberg (Circle Economy and Sustainable Finance Lab) /et al./
+# I hope this is roughly what she meant
+
+** The idea
+
+- *Linear economy* /designs for failure/ and sells *“almost-broken” products*,
+  creating *waste*
+- When they are used, *smart assets* (a *_fleet_* of assets) pay parties
+  involved in value chain (involved with design, commodities, creation,
+  maintenance, et cetera)
+  - Shift */from ownership to use/* leads to *Circular Economy*
+  - *A circular value network* in which materials and products are
+    shared as well as risks and returns
+# Always ask: who are the miners? Isn't there a trusted third party?
+# *Why blockchain?* Automatic, verifiable, distributed contract, no trusted
+# *third party
+
+** Design
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/fleet.png]]
+
+* Fleet demo
+
+# Local dev
+# Connected to Testnet
+
+# Structure
+# Dev stuff: fleet-start, root, and web3
+# db
+# The actual contract
+# Creation of ABI and BIN
+# Initialization steps
+# tests
