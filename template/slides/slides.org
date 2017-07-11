@@ -1,90 +1,160 @@
-#+TITLE:        Vegan en Verder
-#+AUTHOR:       Erwin Rooijakkers, Jeroen Bruijn, Ruud Hendrikx \& Elisa Achterberg
-#+EMAIL:        erwin.rooijakkers@gmail.com
-#+DATE:         01-04-2017
+#+TITLE:        Blockchain, Ethereum, ClojureScript, Fleet
+#+AUTHOR:       Erwin Rooijakkers
+#+EMAIL:        erwinrooijakkers@gmail.com
+#+DATE:         12-07-2017
 #+LANGUAGE:     en
 #+OPTIONS:      H:2 num:t toc:nil \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc <:t
 #+OPTIONS:      d:nil todo:t pri:nil
 #+STARTUP:      beamer
 #+LATEX_HEADER: \usetheme{metropolis}
-#+LATEX_HEADER: \setbeamertemplate{frame footer}{\color{lightgray}Jeroen Bruijn, Ruud Hendrikx, Elisa Achterberg \& Erwin Rooijakkers - Vegan en Verder}
+#+LATEX_HEADER: \setbeamertemplate{frame footer}{Erwin Rooijakkers}
 #+LATEX_HEADER: \metroset{block=fill}
 
-** Agenda
+* Blockchain
 
-- Dierenleed
-- Marketing
-- Meditation session
-- Gezondheid
-- Verder
-
-* Dierenleed
-
-** Animal Rights filmt mishandeling van varkens in slachthuis Tielt (23 maart 2017)
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://www.animalrights.nl/animal-rights-filmt-mishandeling-van-varkens-slachthuis-tielt
-
-** Earthlings
-#+ATTR_LATEX: width=\textwidth
-[[file:../images/earthlings.png]]
-
-*** Earthlings
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://youtu.be/ms7yoerGaPU?list=PLv7whYPHSlwTVb06qz0XrrLikH40cGdhs
-
-** Melk?
-*** DAIRY IS F**KING SCARY! The industry explained in 5 minutes 
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://youtu.be/UcN7SGGoCNI
-
-** Eieren?
-*** What's Wrong With Eggs? The Truth About The Egg Industry
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://youtu.be/utPkDP3T7R4
-
-** Biologisch? Organisch?
-
-*** Verschil tussen biologisch en scharrel
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://www.bio-plus.nl/consument/faq/antwoorden/wat-is-het-verschil-tussen-biologisch-en-scharrel/
-
-** Biologisch? Organisch?
-*** An Unnatural Lifespan
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-http://newinfographic.com/wp-content/uploads/2013/09/slaughtering-animals-unnatural-life-span.jpg
-
-* Marketing
-
-* Meditation session
-
-* Gezondheid
-
-** Anatomie
-#+ATTR_LATEX: width=\textwidth
-[[file:../images/anatomy.jpeg]]
-
-** Forks Over Knives
+** What?
 #+begin_quotation
-"The feature film Forks Over Knives examines the profound claim that most, if not all, of the degenerative diseases that afflict us can be controlled, or even reversed, by rejecting animal-based and processed foods."
+"A *shared*, programmable, cryptographically secure and therefore trusted ledger
+*which no single user controls* and *which can be inspected by everyone*."
+
+-- Klaus Schwab (Chairman World Economic Forum)
 #+end_quotation
 
-*** Forks Over Knives
-:PROPERTIES:
-:BEAMER_env: alertblock
-:END:
-https://youtu.be/cgTnd3QPiBY
+# Useful for cutting out trusted third parties, like banks, and other institutions
+# professor Egbert-Jan Sol (on a recent blockchain meetup):
+# “What robots did for the work force, blockchain will do for the office force.”
 
-** Verder
-- https://youtu.be/pmAYUf3aemg (Gary Yourofsky)
+** Four pillars
+- Cryptographic Tokens and Addresses
+- P2P Networking
+- Consensus Formation Algorithm
+- Virtual Machine
+
+# ** What is the blockchain?
+# - Two kinds of *records*:
+#   - Transactions
+#   - Blocks: batches of *valid transactions* that are hashed and encoded into a *Merkle tree*
+# - Each block includes the *hash* of the *prior* block in the blockchain, linking the two.
+# - *Decentralized* (eliminate risk of data held centrally)
+# - Every *node* or *miner* has whole copy
+#   - No *centralized* "official" copy
+# - Data is *incorruptible*
+# - *Quality* by massive data *replication* and *computational trust*
+
+** This.
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/merkle.jpg]]
+
+(Source: https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/)
+
+# Bitcoin state: transactions of Bitcoin
+# Ethereum state: transactions of Ether, STATE OF VM
+
+** Consensus
+- *Proof of Work (PoW)*: the current difficulty in the Bitcoin network requires
+  miners to try quadrillions of times before finding a nonce that fits.
+  (because *hashing* can provide vastly different outputs on minor changes)
+- *Proof of stake (PoS)*: mining is done by stakeholders in the ecosystem who
+  have the strongest incentives to be good stewards of the system. (E.g., by
+  setting coins aside for a longer period as stake.)
+
+* Smart Contracts
+
+** Model
+
+# Wanted to make a Rich Hickey joke related to OO, but it is not.
+- Stateless webservices
+- Contract-oriented programming
+- Gas fees
+# 1,5 million euro for a GB in March, lower gas price
+
+** Stateless web services
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/awslambda.png]]
+
+# Correct: stateless web services
+
+# IP -> address
+# http request -> transaction
+# security call-by-call
+# Microservices Architectures
+
+# Slow: waiting for blocks
+# Pay gas
+
+** Contract-oriented programming
+
+#+begin_src javascript
+contract HelloSayerFactory {
+
+  function create() returns (address) {
+    return address(new HelloSayer());
+  }
+
+  function delete(address addr){
+    HelloSayer(addr).remove();
+  }
+
+}
+#+end_src
+
+** Tools
+- geth: (Go Ethereum) *cli* for running full Ethereum node, exposes RPC
+- web3.js: Ethereum compatible *JavaScript API* which implements the Generic *JSON RPC spec*
+- solc: JavaScript bindings for Solidity compiler (creates *ABI* and *BIN*)
+
+** MetaMask (also: Mist; Parity)
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/metamask.png]]
+
+# - *Prompt user* when having to sign
+
+* Fleet
+** Why ClojureScript + blockchain
+- *Blockchain*
+- *ClojureScript*!
+  - Reagent
+  - Figwheel
+
+** Code inspiration and big help
+- https://medium.com/@matus.lestan
+- https://github.com/district0x/ethlance
+- https://ethlance.com/\#/job/128
+
+[[file:../images/madvas.png]]
+** Idea
+- Elisa Achterberg (Circle Economy and Sustainable Finance Lab) /et al./
+# I hope this is roughly what she meant
+
+** The idea
+
+- *Linear economy* /designs for failure/ and sells *“almost-broken” products*,
+  creating *waste*
+- When they are used, *smart assets* (a *_fleet_* of assets) pay parties
+  involved in value chain (involved with design, commodities, creation,
+  maintenance, et cetera)
+  - Shift */from ownership to use/* leads to *Circular Economy*
+  - *A circular value network* in which materials and products are
+    shared as well as risks and returns
+# Always ask: who are the miners? Isn't there a trusted third party?
+# *Why blockchain?* Automatic, verifiable, distributed contract, no trusted
+# *third party
+
+** Design
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/fleet.png]]
+
+* Fleet demo
+
+# Local dev
+# Connected to Testnet
+
+# Structure
+# Dev stuff: fleet-start, root, and web3
+# db
+# The actual contract
+# Creation of ABI and BIN
+# Initialization steps
+# tests
