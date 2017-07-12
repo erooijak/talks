@@ -1,4 +1,4 @@
-#+TITLE:        Blockchain, Ethereum, ClojureScript, Fleet
+#+TITLE:        Blockchain, Smart Contracts, ClojureScript, Fleet
 #+AUTHOR:       Erwin Rooijakkers
 #+EMAIL:        erwinrooijakkers@gmail.com
 #+DATE:         12-07-2017
@@ -11,14 +11,28 @@
 #+LATEX_HEADER: \metroset{block=fill}
 
 * Blockchain
+# Blockchain event
+# ClojureScript meetup. Let met talk about it. Then I HAVE to build it
 
-** What?
+** Initial Coin Offering (ICO) announcement
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/ico.png]]
+
+# White paper
+** Blockchain?
 #+begin_quotation
 "A *shared*, programmable, cryptographically secure and therefore trusted ledger
 *which no single user controls* and *which can be inspected by everyone*."
 
 -- Klaus Schwab (Chairman World Economic Forum)
 #+end_quotation
+
+#    Some more pillars
+#  - Every *node* or *miner* has whole copy
+#  - No *centralized* "official" copy
+#  - Data is *incorruptible*
+#  - *Quality* by massive data *replication* and *computational trust*
 
 # Useful for cutting out trusted third parties, like banks, and other institutions
 # professor Egbert-Jan Sol (on a recent blockchain meetup):
@@ -30,42 +44,49 @@
 - Consensus Formation Algorithm
 - Virtual Machine
 
-# ** What is the blockchain?
-# - Two kinds of *records*:
-#   - Transactions
-#   - Blocks: batches of *valid transactions* that are hashed and encoded into a *Merkle tree*
-# - Each block includes the *hash* of the *prior* block in the blockchain, linking the two.
-# - *Decentralized* (eliminate risk of data held centrally)
-# - Every *node* or *miner* has whole copy
-#   - No *centralized* "official" copy
-# - Data is *incorruptible*
-# - *Quality* by massive data *replication* and *computational trust*
-
 ** This.
 #+ATTR_LATEX: width=\textwidth
 [[file:../images/merkle.jpg]]
 
-(Source: https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/)
+Source: https://blog.ethereum.org/2015/11/15/merkling-in-ethereum/
 
 # Bitcoin state: transactions of Bitcoin
 # Ethereum state: transactions of Ether, STATE OF VM
 
 ** Consensus
-- *Proof of Work (PoW)*: the current difficulty in the Bitcoin network requires
-  miners to try quadrillions of times before finding a nonce that fits.
-  (because *hashing* can provide vastly different outputs on minor changes)
-- *Proof of stake (PoS)*: mining is done by stakeholders in the ecosystem who
-  have the strongest incentives to be good stewards of the system. (E.g., by
-  setting coins aside for a longer period as stake.)
+- Proof of Work (*PoW*)
+# the current difficulty in the Bitcoin network requires
+#   miners to try quadrillions of times before finding a nonce that fits.
+#   (because *hashing* can provide vastly different outputs on minor changes)
+# Bitcoin energy as Ireland
+- Proof of Stake (*PoS*)
+# mining is done by stakeholders in the ecosystem who
+#  have the strongest incentives to be good stewards of the system. (E.g., by
+#  setting coins aside for a longer period as stake.)
 
 * Smart Contracts
 
-** Model
+** Business logic in decentralized network
+# Smart contracts put *business logic* in a *decentralized network*
 
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/smartcontract.jpg]]
+
+Source: ChainThat YouTube video
+
+** Model
 # Wanted to make a Rich Hickey joke related to OO, but it is not.
 - Stateless webservices
 - Contract-oriented programming
 - Gas fees
+
+** Stateless webservices
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/smartcontracteth.png]]
+
+Source: ETH news
+
 # 1,5 million euro for a GB in March, lower gas price
 
 ** Stateless web services
@@ -113,10 +134,9 @@ contract HelloSayerFactory {
 
 * Fleet
 ** Why ClojureScript + blockchain
-- *Blockchain*
-- *ClojureScript*!
-  - Reagent
-  - Figwheel
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/godmode.jpg]]
 
 ** Code inspiration and big help
 - https://medium.com/@matus.lestan
@@ -125,26 +145,64 @@ contract HelloSayerFactory {
 
 [[file:../images/madvas.png]]
 ** Idea
-- Elisa Achterberg (Circle Economy and Sustainable Finance Lab) /et al./
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/circular.png]]
+
+
+#  Elisa Achterberg (Circle Economy and Sustainable Finance Lab) /et al./
 # I hope this is roughly what she meant
 
-** The idea
+** Linear economy designs for failure
 
-- *Linear economy* /designs for failure/ and sells *“almost-broken” products*,
-  creating *waste*
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/politico.jpg]]
+
+Source: Politico Europe
+
+# - *Linear economy* /designs for failure/ and sells *“almost-broken” products*,
+#   creating *waste*
+
+** Smart assets
+
 - When they are used, *smart assets* (a *_fleet_* of assets) pay parties
   involved in value chain (involved with design, commodities, creation,
   maintenance, et cetera)
-  - Shift */from ownership to use/* leads to *Circular Economy*
-  - *A circular value network* in which materials and products are
-    shared as well as risks and returns
+
+** Shift from ownership to use
+
+#+ATTR_LATEX: width=\textwidth
+[[file:../images/circulareconomy.png]]
+
+Source: Circle Economy
+
+  # - Shift */from ownership to use/* leads to *Circular Economy*
+  # - *A circular value network* in which materials and products are
+  #   shared as well as risks and returns
+
 # Always ask: who are the miners? Isn't there a trusted third party?
 # *Why blockchain?* Automatic, verifiable, distributed contract, no trusted
 # *third party
 
-** Design
+** Contract design
 #+ATTR_LATEX: width=\textwidth
 [[file:../images/fleet.png]]
+
+** App design
+- Reagent atom for *application state*:
+  - Frontend state: (beneficiaries)
+  - Blockchain state: Contract instance, abi and bin
+  - Address of user
+  - *queries.cljs* to interact with ratom
+  - *views.cljs* reacts to its changes $v=f(S)$, or something
+
+- *blockchain.cljs* /deploys/ or /retrieves/ contracts
+  - Depending on network of web3 object (Ropsten or local)
+- *smart\textunderscore{}asset\textunderscore{}manager.cljs* calls methods on instances
+- Both use the *web3-cljs* web3.js wrapper
+
+- Setup local blockchain for development with *fleet.el*
+- TODO: *tests*..., *IPFS* deployment
 
 * Fleet demo
 
